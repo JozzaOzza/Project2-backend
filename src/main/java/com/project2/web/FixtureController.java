@@ -44,9 +44,10 @@ public class FixtureController {
 		return ResponseEntity.ok(this.matchService.getOne(id));
 	}
 	
-	@PutMapping("/update/{id}")
-	public ResponseEntity<Fixture> updateMatch(@PathVariable Long id, Fixture m) {
-		ResponseEntity<Fixture> response = new ResponseEntity<Fixture>(this.matchService.update(id, m), HttpStatus.ACCEPTED);
+	@PutMapping("/replace/{id}")
+	public ResponseEntity<Fixture> updateMatch(@PathVariable Long id, @RequestBody Fixture m) {
+		Fixture body = this.matchService.update(id, m);
+		ResponseEntity<Fixture> response = new ResponseEntity<Fixture>(body, HttpStatus.ACCEPTED);
 		return response;
 	}
 	
