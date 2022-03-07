@@ -39,11 +39,11 @@ public class FixtureControllerIntegrationTest {
 	
 	@Test
 	void testCreate() throws Exception {
-		Fixture testMatch = new Fixture(null, "Breakout", "20XX", 1700L);
+		Fixture testMatch = new Fixture(null, "Breakout", "20XX", 17L);
 		String testMatchAsJSON=this.mapper.writeValueAsString(testMatch);
 		RequestBuilder req = post("/create").contentType(MediaType.APPLICATION_JSON).content(testMatchAsJSON);
 		
-		Fixture testCreatedMatch = new Fixture(1L, "Breakout", "20XX", 1700L);
+		Fixture testCreatedMatch = new Fixture(3L, "Breakout", "20XX", 17L);
 		String testCreatedMatchAsJSON = this.mapper.writeValueAsString(testCreatedMatch); 
 		ResultMatcher checkStatus = status().isCreated(); //status 201 - created
 		ResultMatcher checkBody = content().json(testCreatedMatchAsJSON); //checks if the body matches my testCreatedMatchAsJson
@@ -78,10 +78,10 @@ public class FixtureControllerIntegrationTest {
 	
 	@Test
 	void testUpdate() throws Exception {
-		Fixture testMatch = new Fixture(null, "Octane", "Spectre", 1000L);
+		Fixture testMatch = new Fixture(null, "Octane", "Spectre", 10L);
 		String testMatchAsJSON=this.mapper.writeValueAsString(testMatch);
 		RequestBuilder req = put("/replace/1").contentType(MediaType.APPLICATION_JSON).content(testMatchAsJSON);
-		Fixture testMatchs = new Fixture(1L, "Octane", "Spectre", 1000L);
+		Fixture testMatchs = new Fixture(1L, "Octane", "Spectre", 10L);
 		String json = this.mapper.writeValueAsString(testMatchs);
 		ResultMatcher checkStatus = status().isAccepted();
 		ResultMatcher checkBody = content().json(json);
